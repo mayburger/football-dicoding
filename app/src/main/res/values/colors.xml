@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0063ff</color>
+    <color name="colorPrimaryDark">#0048b9</color>
+    <color name="colorAccent">#0063ff</color>
+    <color name="colorGreyIndicator">#d7d7d7</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorDark">#202020</color>
+    <color name="colorTextGrey">#a4aeba</color>
+    <color name="colorText">#39394a</color>
+    <color name="colorTextDark">#262631</color>
+    <color name="colorCard">#f0eff4</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="dim_gray">#696969</color>
+    <color name="greyIndicator">#c6c6c6</color>
+    <color name="light_grey">#e1e1e1</color>
+
+</resources>

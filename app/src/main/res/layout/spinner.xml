@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginBottom="@dimen/dimen_16dp"
+    android:layout_marginLeft="@dimen/dimen_8dp"
+    android:layout_marginRight="@dimen/dimen_8dp"
+    android:background="@drawable/circle_grey_light"
+    android:drawableEnd="@drawable/ic_drop_down_grey"
+    android:drawableRight="@drawable/ic_drop_down_grey"
+    android:gravity="center_vertical"
+    android:hint="Search Events by Name"
+    android:paddingLeft="@dimen/dimen_16dp"
+    android:paddingRight="@dimen/dimen_16dp"
+    android:textColor="@color/dim_gray"
+    android:textColorHint="@color/dim_gray"
+    android:textSize="@dimen/text_14sp" />

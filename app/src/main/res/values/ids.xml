@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="rootDetailId" type="id" />
+    <item name="listTeams" type="id" />
+    <item name="detailRoot" type="id"/>
+
+    <item name="rootId" type="id"/>
+    <item name="logoHome" type="id"/>
+    <item name="logoAway" type="id"/>
+    <item name="homeName" type="id"/>
+    <item name="awayName" type="id"/>
+    <item name="homeScore" type="id"/>
+    <item name="awayScore" type="id"/>
+    <item name="dash" type="id"/>
+    <item name="vs" type="id"/>
+
+</resources>

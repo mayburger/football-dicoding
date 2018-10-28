@@ -1,0 +1,34 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">events</string>
+
+    <string name="arsenal_name">Arsenal</string>
+    <string name="barcelona_name">Arsenal</string>
+    <string name="bayenmunchen_name">Arsenal</string>
+    <string name="chelsea_name">Arsenal</string>
+    <string name="internazionalemilano_name">Arsenal</string>
+    <string name="juventus_name">Arsenal</string>
+    <string name="liverpool_name">Arsenal</string>
+    <string name="manchestercity_name">Arsenal</string>
+    <string name="manchesterunited_name">Arsenal</string>
+    <string name="realmadrid_name">Arsenal</string>
+
+    <string name="previous_match">Prev. Match</string>
+    <string name="next_match">Next Match</string>
+
+    <string name="arsenal_desc">Arsenal is a football club from United Kingdom</string>
+    <string name="barcelona_desc" tools:ignore="Typos">Barcelona is a football club from Spain</string>
+    <string name="bayenmunchen_desc" tools:ignore="Typos">Bayern Munich is a football club from Germany</string>
+    <string name="chelsea_desc" tools:ignore="Typos">Chelsea is a football club from United Kingdom</string>
+    <string name="internazionalemilano_desc" tools:ignore="Typos">Inter Milan is a football club from Italy</string>
+    <string name="juventus_desc" tools:ignore="Typos">Juventus is a football club from Italy</string>
+    <string name="liverpool_desc" tools:ignore="Typos">Liverpool is a football club from United Kingdom</string>
+    <string name="manchestercity_desc" tools:ignore="Typos">Manchester City is a football club from United Kingdom</string>
+    <string name="manchesterunited_desc" tools:ignore="Typos">Manchester United is a football club from United Kingdom</string>
+    <string name="realmadrid_desc" tools:ignore="Typos">Real Madrid is a football club from Spain</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favorite">Favorite</string>
+    <string name="fav_match">Fav. Match</string>
+
+</resources>
