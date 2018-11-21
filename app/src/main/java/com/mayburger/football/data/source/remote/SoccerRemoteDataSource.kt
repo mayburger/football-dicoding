@@ -1,13 +1,10 @@
 package com.mayburger.football.data.source.remote
 
-import android.content.Context
 import com.mayburger.football.data.source.SoccerDataSource
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.toast
 import org.jetbrains.annotations.NotNull
-import kotlin.coroutines.experimental.coroutineContext
 
 
 /**
@@ -23,6 +20,20 @@ class SoccerRemoteDataSource : SoccerDataSource {
                 .subscribe { results ->
                     if (results != null) {
                         callback.onTeamsLoaded(results.teams!!)
+                    } else {
+                        callback.onDataNotAvailable()
+                    }
+                }
+    }
+
+    override fun getPlayers(callback: SoccerDataSource.GetPlayersCallback, team: String) {
+        apiService.getPlayers(
+                team)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe { results ->
+                    if (results != null) {
+                        callback.onPlayersLoaded(results.player!!)
                     } else {
                         callback.onDataNotAvailable()
                     }
@@ -46,7 +57,7 @@ class SoccerRemoteDataSource : SoccerDataSource {
                 }
     }
 
-    override fun getEventByQuery(callback: SoccerDataSource.GetSearchCallback, name: String) {
+    override fun getEventByQuery(callback: SoccerDataSource.GetEventsSearchCallback, name: String) {
         apiService.onQueryEvent(
                 name)
                 .observeOn(AndroidSchedulers.mainThread())

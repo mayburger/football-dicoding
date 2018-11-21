@@ -1,9 +1,6 @@
 package com.mayburger.football.data.source.remote
 
-import com.mayburger.football.data.model.Events
-import com.mayburger.football.data.model.Leagues
-import com.mayburger.football.data.model.Search
-import com.mayburger.football.data.model.Teams
+import com.mayburger.football.data.model.*
 import java.util.concurrent.TimeUnit
 
 import okhttp3.OkHttpClient
@@ -53,8 +50,13 @@ internal interface SoccerService {
 
     @GET("search_all_teams.php")
     fun getTeamsByLeague(
-            @Query("l") league:String
+            @Query("l") league: String
     ): Observable<Teams>
+
+    @GET("searchplayers.php")
+    fun getPlayers(
+            @Query("t") team: String
+    ): Observable<Players>
 
 
     object Factory {

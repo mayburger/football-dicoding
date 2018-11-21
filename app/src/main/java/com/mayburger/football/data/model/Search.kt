@@ -2,7 +2,7 @@ package com.mayburger.football.data.model
 
 import java.io.Serializable
 
-data class Search(val eventsy: List<Event>){
+data class Search(val a: List<Event>) {
 
     var event: List<Event>? = null
 
@@ -37,7 +37,7 @@ data class Search(val eventsy: List<Event>){
         // Date of the EventFavorites
         var strDate: String? = null
 
-        var typeEvent:String? = null
+        var typeEvent: String? = null
         var idEvent: String? = null
     }
 }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -51,15 +52,12 @@ class NextEventsAdapter(var list: List<Events.Event> = arrayListOf(), var ctx: C
 
         private val date: TextView = view.find(R.id.date)
         private val vs: TextView = view.find(R.id.vs)
-        private val detail: CardView = view.find(R.id.detail)
-        private val detail_text: TextView = view.find(R.id.detail_text)
         private val favorite: CardView = view.find(R.id.favorite)
         private val favorite_text: TextView = view.find(R.id.favorite_text)
         private val unfavorite: CardView = view.find(R.id.unfavorite)
         private val unfavorite_text: TextView = view.find(R.id.unfavorite_text)
-        private val calendar: CardView = view.find(R.id.calendar)
-        private val calendar_text: TextView = view.find(R.id.calendar_text)
         private val name: TextView = view.find(R.id.name)
+        private val root: LinearLayout = view.find(R.id.root)
 
         fun bindItem(events: Events.Event, listener: (Events.Event) -> Unit) {
 
@@ -122,14 +120,8 @@ class NextEventsAdapter(var list: List<Events.Event> = arrayListOf(), var ctx: C
             with(unfavorite_text) {
                 typeface = light
             }
-            detail.setOnClickListener {
+            root.setOnClickListener {
                 listener(events)
-            }
-            with(detail_text) {
-                typeface = light
-            }
-            with(calendar_text) {
-                typeface = light
             }
         }
     }
@@ -138,7 +130,9 @@ class NextEventsAdapter(var list: List<Events.Event> = arrayListOf(), var ctx: C
         repo.getTeamsByName(object : SoccerDataSource.GetTeamsCallback {
             override fun onTeamsLoaded(teams: List<Teams.Team>?) {
                 if (teams != null) {
+                    try{
                     Glide.with(ctx).load(teams.get(0).strTeamBadge).apply(RequestOptions().centerCrop()).into(image)
+                    }catch (e:Exception){}
                 }
             }
 

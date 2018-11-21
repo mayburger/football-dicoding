@@ -8,11 +8,11 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.mayburger.football.base.BaseActivity
 import com.mayburger.football.mvp.events.EventsFragment
-import com.mayburger.football.mvp.events.fav.mvp.FavEventsFragment
+import com.mayburger.football.mvp.favorites.FavoritesFragment
 import com.mayburger.football.mvp.teams.TeamsFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.ctx
-import java.util.ArrayList
+import java.util.*
 
 
 class HomeActivity : BaseActivity() {
@@ -27,7 +27,7 @@ class HomeActivity : BaseActivity() {
         nav.defaultBackgroundColor = ContextCompat.getColor(ctx, R.color.colorWhite)
 
         setupBottomNavigation(ArrayList(),
-                intArrayOf(R.string.app_name, R.string.app_name, R.string.app_name),
+                intArrayOf(R.string.app_name, R.string.teams, R.string.favorite),
                 intArrayOf(R.drawable.ic_trophy, R.drawable.ic_soccer, R.drawable.ic_unfavorite),
                 intArrayOf(R.color.colorPrimary, R.color.colorPrimary, R.color.colorPrimary)
         )
@@ -39,7 +39,7 @@ class HomeActivity : BaseActivity() {
                 1 ->
                     replaceBottomNavigationFragments(TeamsFragment())
                 2 ->
-                    replaceBottomNavigationFragments(FavEventsFragment())
+                    replaceBottomNavigationFragments(FavoritesFragment())
             }
 
             true
@@ -53,7 +53,7 @@ class HomeActivity : BaseActivity() {
     private fun setupBottomNavigation(itemList: ArrayList<AHBottomNavigationItem>, titleList: IntArray, iconlist: IntArray, colorList: IntArray) {
         nav.accentColor = ContextCompat.getColor(ctx, R.color.colorAccent)
         nav.inactiveColor = ContextCompat.getColor(ctx, R.color.colorGreyIndicator)
-        nav.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
+//        nav.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
 
         for (i in titleList.indices) {
             itemList.add(AHBottomNavigationItem(titleList[i], iconlist[i], colorList[i]))

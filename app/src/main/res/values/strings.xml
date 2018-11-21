@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">events</string>
+    <string name="app_name">prevEvents</string>
 
     <string name="arsenal_name">Arsenal</string>
     <string name="barcelona_name">Arsenal</string>
@@ -28,7 +28,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="favorite">Favorite</string>
+    <string name="favorite">favorites</string>
     <string name="fav_match">Fav. Match</string>
+    <string name="teams">teams</string>
 
 </resources>

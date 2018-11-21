@@ -10,7 +10,7 @@ import com.mayburger.football.R
 import com.mayburger.football.base.BaseFragment
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
-import com.mayburger.football.mvp.search.mvp.SearchEventsFragment
+import com.mayburger.football.mvp.search.events.mvp.SearchEventsFragment
 import kotlinx.android.synthetic.main.fragment_events_main.*
 
 
@@ -23,11 +23,6 @@ class EventsFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_events_main, container, false)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        fragmentManager!!.beginTransaction().remove(this).commit()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

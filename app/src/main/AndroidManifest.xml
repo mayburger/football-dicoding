@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.mayburger.football.EventsDetailActivity"></activity>
+        <activity android:name="com.mayburger.football.DetailActivity" />
+        <activity android:name=".PlayersDetailActivity"/>
     </application>
 
 </manifest>

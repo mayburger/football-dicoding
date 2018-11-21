@@ -19,7 +19,6 @@ open class TeamsPresenter(view: TeamsView) : BasePresenter<TeamsView>() {
     }
 
     fun getEvents(soccerRepo: SoccerRepository, id: String) {
-        EspressoIdlingResource.increment()
         try {
             soccerRepo.getTeamsByLeague(object : SoccerDataSource.GetTeamsCallback {
                 override fun onTeamsLoaded(teams: List<Teams.Team>?) {
@@ -48,9 +47,6 @@ open class TeamsPresenter(view: TeamsView) : BasePresenter<TeamsView>() {
                         if (leagues != null) {
                             if (!leagues.isEmpty()) {
                                 mvpView!!.onGetLeagues(leagues)
-                                if (!EspressoIdlingResource.idlingResource.isIdleNow) {
-                                    EspressoIdlingResource.decrement() // Set app as idle.
-                                }
                             }
                         }
                     } catch (e: Exception) {

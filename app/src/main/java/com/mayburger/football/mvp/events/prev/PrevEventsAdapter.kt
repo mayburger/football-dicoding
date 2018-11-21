@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -58,8 +59,7 @@ open class PrevEventsAdapter(var list: List<Events.Event> = arrayListOf(), var c
         private val favorite_text: TextView = view.find(R.id.favorite_text)
         private val unfavorite: CardView = view.find(R.id.unfavorite)
         private val unfavorite_text: TextView = view.find(R.id.unfavorite_text)
-        private val detail: CardView = view.find(R.id.detail)
-        private val detail_text: TextView = view.find(R.id.detail_text)
+        private val root: LinearLayout = view.find(R.id.root)
 
         @SuppressLint("SetTextI18n")
         fun bindItem(events: Events.Event, listener: (Events.Event) -> Unit) {
@@ -139,11 +139,8 @@ open class PrevEventsAdapter(var list: List<Events.Event> = arrayListOf(), var c
             with(unfavorite_text) {
                 typeface = light
             }
-            detail.setOnClickListener {
+            root.setOnClickListener {
                 listener(events)
-            }
-            with(detail_text) {
-                typeface = light
             }
         }
     }
@@ -153,7 +150,9 @@ open class PrevEventsAdapter(var list: List<Events.Event> = arrayListOf(), var c
         repo.getTeamsByName(object : SoccerDataSource.GetTeamsCallback {
             override fun onTeamsLoaded(teams: List<Teams.Team>?) {
                 if (teams != null) {
-                    Glide.with(ctx).load(teams.get(0).strTeamBadge).apply(RequestOptions().centerCrop()).into(image)
+                    try {
+                        Glide.with(ctx).load(teams.get(0).strTeamBadge).apply(RequestOptions().centerCrop()).into(image)
+                    }catch (e:Exception){}
                 }
             }
 

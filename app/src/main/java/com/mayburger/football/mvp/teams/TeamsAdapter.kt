@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -43,6 +44,7 @@ open class TeamsAdapter(var list: List<Teams.Team> = arrayListOf(), var ctx: Con
         private val image: ImageView = view.find(R.id.image)
         private val text: TextView = view.find(R.id.text)
         private val country: TextView = view.find(R.id.country)
+        private val root: LinearLayout = view.find(R.id.root)
 
         @SuppressLint("SetTextI18n")
         fun bindItem(teams: Teams.Team, listener: (Teams.Team) -> Unit) {
@@ -54,7 +56,12 @@ open class TeamsAdapter(var list: List<Teams.Team> = arrayListOf(), var ctx: Con
                 text = teams.strCountry
                 typeface = light
             }
+            try{
             Glide.with(ctx).load(teams.strTeamBadge).apply(RequestOptions().centerCrop()).into(image)
+            }catch (e:Exception){}
+            root.setOnClickListener {
+                listener(teams)
+            }
         }
     }
 }

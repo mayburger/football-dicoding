@@ -1,10 +1,6 @@
 package com.mayburger.football.data.source
 
-import android.content.Context
-import com.mayburger.football.data.model.Events
-import com.mayburger.football.data.model.Leagues
-import com.mayburger.football.data.model.Search
-import com.mayburger.football.data.model.Teams
+import com.mayburger.football.data.model.*
 import org.jetbrains.annotations.NotNull
 
 /**
@@ -16,10 +12,11 @@ interface SoccerDataSource {
     fun getPrev(callback: GetEventsCallback, @NotNull id: String)
     fun getNext(callback: GetEventsCallback, @NotNull id: String)
     fun getEvent(callback: GetEventsCallback, @NotNull id: String)
-    fun getEventByQuery(callback: GetSearchCallback, @NotNull name: String)
+    fun getEventByQuery(callback: GetEventsSearchCallback, @NotNull name: String)
     fun getTeamsByName(callback: GetTeamsCallback, @NotNull name: String)
     fun getLeagues(callback: GetLeaguesCallback)
     fun getTeamsByLeague(callback: GetTeamsCallback, @NotNull league: String)
+    fun getPlayers(callback: GetPlayersCallback, @NotNull team: String)
 
     interface GetEventsCallback {
         fun onEventsLoaded(events: List<Events.Event>?)
@@ -27,7 +24,13 @@ interface SoccerDataSource {
         fun onError(errorMessage: String)
     }
 
-    interface GetSearchCallback {
+    interface GetPlayersCallback {
+        fun onPlayersLoaded(players: List<Players.Player>?)
+        fun onDataNotAvailable()
+        fun onError(errorMessage: String)
+    }
+
+    interface GetEventsSearchCallback {
         fun onEventsLoaded(events: List<Search.Event>?)
         fun onDataNotAvailable()
         fun onError(errorMessage: String)

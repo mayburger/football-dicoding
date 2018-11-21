@@ -17,8 +17,7 @@ open class PrevEventsPresenter(view: PrevEventsView) : BasePresenter<PrevEventsV
         attachView(view)
     }
 
-    fun getEvents(soccerRepo: SoccerRepository, league:String) {
-        EspressoIdlingResource.increment()
+    fun getEvents(soccerRepo: SoccerRepository, league: String) {
         try {
             soccerRepo.getPrev(object : SoccerDataSource.GetEventsCallback {
                 override fun onEventsLoaded(events: List<Events.Event>?) {
@@ -52,14 +51,12 @@ open class PrevEventsPresenter(view: PrevEventsView) : BasePresenter<PrevEventsV
                         if (leagues != null) {
                             if (!leagues.isEmpty()) {
                                 mvpView!!.onGetLeagues(leagues)
-                                if (!EspressoIdlingResource.idlingResource.isIdleNow) {
-                                    EspressoIdlingResource.decrement() // Set app as idle.
-                                }
                             }
                         }
                     } catch (e: Exception) {
                     }
                 }
+
                 override fun onDataNotAvailable() {}
                 override fun onError(errorMessage: String) {}
             })

@@ -1,6 +1,5 @@
-package com.mayburger.football.match
+package com.mayburger.football
 
-import com.mayburger.football.TestContextProvider
 import com.google.gson.Gson
 import com.mayburger.football.mockito.*
 import com.mayburger.football.utils.Constants
@@ -14,7 +13,7 @@ import org.mockito.MockitoAnnotations
 /**
  * Created by root on 2/28/18.
  */
-class EventPresenterTest {
+class 1EventPresenterTest {
     @Mock
     private
     lateinit var view: EventView

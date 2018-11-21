@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.mayburger.football.EventsDetailActivity
+import com.mayburger.football.DetailActivity
 import com.mayburger.football.R
 import com.mayburger.football.data.model.Events
 import com.mayburger.football.data.model.Leagues
@@ -17,7 +17,7 @@ import com.mayburger.football.db.EventFavorites.Companion.EVENT_ID
 import com.mayburger.football.mvp.events.prev.PrevEventsAdapter
 import com.mayburger.football.ui.MvpFragment
 import com.mayburger.football.utils.Constants.SPORT
-import kotlinx.android.synthetic.main.fragment_events.*
+import kotlinx.android.synthetic.main.fragment_prev.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.toast
 
@@ -56,7 +56,7 @@ open class PrevEventsFragment : MvpFragment<PrevEventsPresenter>(), PrevEventsVi
     fun getEventsData(id:String){
         if (isNetworkAvailable()) {
             mvpPresenter!!.getEvents(repoInstance(), id)
-            recEvents.visibility = View.GONE
+            recyclerPrev.visibility = View.GONE
             swipeRefresh.isRefreshing = true
             swipeRefresh.setColorSchemeColors(ContextCompat.getColor(ctx, R.color.colorAccent))
         } else {
@@ -66,7 +66,7 @@ open class PrevEventsFragment : MvpFragment<PrevEventsPresenter>(), PrevEventsVi
         swipeRefresh.setOnRefreshListener {
             if (isNetworkAvailable()) {
                 mvpPresenter!!.getEvents(repoInstance(),id)
-                recEvents.visibility = View.GONE
+                recyclerPrev.visibility = View.GONE
                 swipeRefresh.isRefreshing = true
             } else {
                 toast("Please check your internet connection!")
@@ -76,7 +76,7 @@ open class PrevEventsFragment : MvpFragment<PrevEventsPresenter>(), PrevEventsVi
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_events, container, false)
+        return inflater.inflate(R.layout.fragment_prev, container, false)
     }
 
     private lateinit var adapter: PrevEventsAdapter
@@ -88,15 +88,18 @@ open class PrevEventsFragment : MvpFragment<PrevEventsPresenter>(), PrevEventsVi
     override fun onGetEvents(events: List<Events.Event>) {
         try {
             swipeRefresh.isRefreshing = false
-            recEvents.visibility = View.VISIBLE
+            recyclerPrev.visibility = View.VISIBLE
             adapter = PrevEventsAdapter(events, ctx, repoInstance()) { it ->
-                val intent = Intent(context, EventsDetailActivity::class.java)
+                val intent = Intent(context, DetailActivity::class.java)
                 val event: Events.Event = it
                 intent.putExtra(EVENT_ID, event.idEvent)
+
+                intent.putExtra("id", event)
+
                 startActivity(intent)
             }
-            recEvents.layoutManager = LinearLayoutManager(ctx)
-            recEvents.adapter = adapter
+            recyclerPrev.layoutManager = LinearLayoutManager(ctx)
+            recyclerPrev.adapter = adapter
         } catch (e: Exception) {
             e.printStackTrace()
         }

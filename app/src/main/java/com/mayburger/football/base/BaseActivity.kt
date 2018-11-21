@@ -49,7 +49,8 @@ open class BaseActivity : AppCompatActivity() {
      **/
     fun initBackPressed(activity: AppCompatActivity) {
         OnBackPressedFun().detailFragmentBack(activity)
-        OnBackPressedFun().searchFragmentBack(activity)
+        OnBackPressedFun().searchEventsFragmentBack(activity)
+        OnBackPressedFun().searchTeamsFragmentBack(activity)
     }
 
 }

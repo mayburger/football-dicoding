@@ -30,14 +30,6 @@ open class BaseRecyclerAdapter<T : RecyclerView.ViewHolder> : RecyclerView.Adapt
         DatabaseHelper().removeEventFromFavorite(id, ctx)
     }
 
-    fun addTeam(team: Teams.Team, ctx: Context) {
-        DatabaseHelper().addTeamToFavorite(team, ctx)
-    }
-
-    fun removeTeam(id: String, ctx: Context) {
-        DatabaseHelper().removeTeamFromFavorite(id, ctx)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): T {
         return null!!
     }

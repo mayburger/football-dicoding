@@ -1,16 +1,23 @@
 package com.mayburger.football.mvp.teams
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.AppCompatAutoCompleteTextView
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.mayburger.football.DetailActivity
 import com.mayburger.football.R
 import com.mayburger.football.data.model.Leagues
 import com.mayburger.football.data.model.Teams
+import com.mayburger.football.db.TeamFavorites.Companion.TEAM_NAME
+import com.mayburger.football.mvp.search.events.mvp.SearchEventsFragment
+import com.mayburger.football.mvp.search.teams.mvp.SearchTeamsFragment
 import com.mayburger.football.ui.MvpFragment
 import com.mayburger.football.utils.Constants
 import kotlinx.android.synthetic.main.fragment_teams.*
@@ -25,8 +32,12 @@ open class TeamsFragment : MvpFragment<TeamsPresenter>(), TeamsView// Required e
             swipeRefresh.isRefreshing = false
             recTeams.visibility = View.VISIBLE
             adapter = TeamsAdapter(teams, ctx, repoInstance()) { it ->
+                val intent = Intent(context, DetailActivity::class.java)
+                val event: Teams.Team = it
+                intent.putExtra(TEAM_NAME, event.strTeam)
+                startActivity(intent)
             }
-            recTeams.layoutManager = GridLayoutManager(ctx,2)
+            recTeams.layoutManager = GridLayoutManager(ctx, 2)
             recTeams.adapter = adapter
         } catch (e: Exception) {
             e.printStackTrace()
@@ -87,5 +98,9 @@ open class TeamsFragment : MvpFragment<TeamsPresenter>(), TeamsView// Required e
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mvpPresenter!!.getLeagues(repoInstance())
+        val activity = activity as AppCompatActivity
+        search.setOnClickListener {
+            addFragmentOnTop(activity, SearchTeamsFragment(), R.id.frame_top)
+        }
     }
 }

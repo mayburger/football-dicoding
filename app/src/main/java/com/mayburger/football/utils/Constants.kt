@@ -12,6 +12,7 @@ object Constants {
 
     const val NEXT_EVENTS = "NEXT_EVENTS"
     const val PREV_EVENTS = "PREV_EVENTS"
+    const val PLAYERS = "players"
 
     const val FORWARD = "ic_forward"
     const val MIDFIELD = "ic_midfield"

@@ -2,9 +2,10 @@ package com.mayburger.football.db
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import com.google.gson.TypeAdapterFactory
 import org.jetbrains.anko.db.*
 
-class DatabaseInitializer(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "evelinesy.db", null, 4) {
+class DatabaseInitializer(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "abcsdssasasaama.db", null, 4) {
     companion object {
         private var instance: DatabaseInitializer? = null
 
@@ -22,7 +23,7 @@ class DatabaseInitializer(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "evelines
         db.createTable(EventFavorites.TABLE_EVENTS, true,
                 EventFavorites.EVENT_ID to TEXT + PRIMARY_KEY)
         db.createTable(TeamFavorites.TABLE_TEAMS, true,
-                TeamFavorites.TEAM_ID to TEXT + PRIMARY_KEY)
+                TeamFavorites.TEAM_NAME to TEXT + PRIMARY_KEY)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {

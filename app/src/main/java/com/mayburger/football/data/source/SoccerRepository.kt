@@ -1,9 +1,6 @@
 package com.mayburger.football.data.source
 
-import com.mayburger.football.data.model.Events
-import com.mayburger.football.data.model.Leagues
-import com.mayburger.football.data.model.Search
-import com.mayburger.football.data.model.Teams
+import com.mayburger.football.data.model.*
 import org.jetbrains.annotations.NotNull
 import java.net.URL
 
@@ -13,6 +10,25 @@ import java.net.URL
 
 
 class SoccerRepository(private val remoteDataSource: SoccerDataSource) : SoccerDataSource {
+
+    override fun getPlayers(callback: SoccerDataSource.GetPlayersCallback, team: String) {
+        remoteDataSource.getPlayers(object : SoccerDataSource.GetPlayersCallback {
+            override fun onPlayersLoaded(players: List<Players.Player>?) {
+                if (players != null) {
+                    callback.onPlayersLoaded(players)
+                }
+            }
+
+            override fun onDataNotAvailable() {
+                /** unused **/
+            }
+
+            override fun onError(errorMessage: String) {
+                /** unused **/
+            }
+        }, team)
+    }
+
     override fun getTeamsByLeague(callback: SoccerDataSource.GetTeamsCallback, league: String) {
         remoteDataSource.getTeamsByLeague(object : SoccerDataSource.GetTeamsCallback {
             override fun onTeamsLoaded(teams: List<Teams.Team>?) {
@@ -51,8 +67,8 @@ class SoccerRepository(private val remoteDataSource: SoccerDataSource) : SoccerD
         })
     }
 
-    override fun getEventByQuery(callback: SoccerDataSource.GetSearchCallback, name: String) {
-        remoteDataSource.getEventByQuery(object : SoccerDataSource.GetSearchCallback {
+    override fun getEventByQuery(callback: SoccerDataSource.GetEventsSearchCallback, name: String) {
+        remoteDataSource.getEventByQuery(object : SoccerDataSource.GetEventsSearchCallback {
             override fun onEventsLoaded(events: List<Search.Event>?) {
                 if (events != null) {
                     if (!events.isEmpty()) {

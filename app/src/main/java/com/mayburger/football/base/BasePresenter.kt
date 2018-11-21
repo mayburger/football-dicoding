@@ -32,12 +32,12 @@ open class BasePresenter<V> {
         DatabaseHelper().removeEventFromFavorite(id, ctx)
     }
 
-    fun addTeam(team: Teams.Team, ctx: Context) {
-        DatabaseHelper().addTeamToFavorite(team, ctx)
+    fun addTeam(name: String, ctx: Context) {
+        DatabaseHelper().addTeamToFavorite(name, ctx)
     }
 
-    fun removeTeam(id: String, ctx: Context) {
-        DatabaseHelper().removeTeamFromFavorite(id, ctx)
+    fun removeTeam(name: String, ctx: Context) {
+        DatabaseHelper().removeTeamFromFavorite(name, ctx)
     }
 
     fun showInput(act: Activity) {

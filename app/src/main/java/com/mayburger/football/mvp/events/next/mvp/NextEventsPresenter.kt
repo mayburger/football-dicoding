@@ -25,7 +25,6 @@ open class NextEventsPresenter(view: NextEventsView) : BasePresenter<NextEventsV
     }
 
     fun getEvents(soccerRepo: SoccerRepository, id: String) {
-        EspressoIdlingResource.increment()
         try {
             soccerRepo.getNext(object : SoccerDataSource.GetEventsCallback {
                 override fun onEventsLoaded(events: List<Events.Event>?) {
@@ -54,9 +53,6 @@ open class NextEventsPresenter(view: NextEventsView) : BasePresenter<NextEventsV
                         if (leagues != null) {
                             if (!leagues.isEmpty()) {
                                 mvpView!!.onGetLeagues(leagues)
-                                if (!EspressoIdlingResource.idlingResource.isIdleNow) {
-                                    EspressoIdlingResource.decrement() // Set app as idle.
-                                }
                             }
                         }
                     } catch (e: Exception) {

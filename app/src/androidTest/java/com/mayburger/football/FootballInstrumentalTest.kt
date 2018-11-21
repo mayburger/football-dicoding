@@ -3,13 +3,11 @@ package com.mayburger.football
 
 import android.os.Handler
 import android.os.Looper
-import android.support.test.espresso.Espresso
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.action.ViewActions.swipeDown
 import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
@@ -27,10 +25,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import com.mayburger.football.espresso.EspressoIdlingResource
 import android.support.test.espresso.IdlingRegistry
+import android.support.test.espresso.action.ViewActions.swipeDown
 import org.junit.After
 import org.junit.Before
-
-
 
 
 @LargeTest
@@ -40,66 +37,52 @@ class FootballInstrumentalTest {
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(HomeActivity::class.java)
+
     @Test
     fun splashActivityTest() {
         Looper.prepare()
         // Wait for data to be loaded
-        onView(withId(R.id.recMatch))
+        onView(withId(R.id.recyclerPrev))
                 .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        try { Thread.sleep(1500) } catch (e: InterruptedException) { e.printStackTrace() }
         onView(withId(R.id.awayLine)).perform(click())
         onView(withId(R.id.homeLine)).perform(click())
         onView(withId(R.id.favorite)).perform(click())
         pressBack()
-        onView(
-                allOf(withId(R.id.bottom_navigation_container),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.nav),
-                                        1),
-                                1),
-                        isDisplayed())).perform(click())
-        Handler().postDelayed({}, 1000)
-        onView(withId(R.id.recMatch)).perform(
-                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withText("Next")).perform(click())
+        try { Thread.sleep(1500) } catch (e: InterruptedException) { e.printStackTrace() }
+        onView(withId(R.id.recyclerNext))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, click()))
         onView(withId(R.id.awayLine)).perform(click())
         onView(withId(R.id.homeLine)).perform(click())
+        onView(withId(R.id.favorite)).perform(click())
+        pressBack()
+        onView(withText("teams")).perform(click())
+        try { Thread.sleep(1500) } catch (e: InterruptedException) { e.printStackTrace() }
+        onView(withId(R.id.recTeams))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.favorite)).perform(click())
+        onView(withText("PLAYERS")).perform(click())
+        onView(withId(R.id.recycler))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        pressBack()
+        pressBack()
+        onView(withText("favorites")).perform(click())
+        onView(withId(R.id.recEvents))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.unfavorite)).perform(click())
         pressBack()
-        onView(withId(R.id.swipeRefresh))
+        onView(withId(R.id.swipeRefreshEvents))
                 .perform(withCustomConstraints(swipeDown(), isDisplayingAtLeast(85)))
-        Handler().postDelayed({}, 1500)
-        onView(
-                allOf(withId(R.id.bottom_navigation_container),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.nav),
-                                        1),
-                                2),
-                        isDisplayed())).perform(click())
-        onView(withId(R.id.recMatch)).perform(
-                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-        onView(withId(R.id.awayLine)).perform(click())
-        onView(withId(R.id.homeLine)).perform(click())
-        onView(withId(R.id.favorite)).perform(click())
-        pressBack()
-        onView(
-                allOf(withId(R.id.bottom_navigation_container),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.nav),
-                                        1),
-                                1),
-                        isDisplayed())).perform(click())
-        Handler().postDelayed({}, 1000)
-        onView(withId(R.id.recMatch)).perform(
-                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-        onView(withId(R.id.awayLine)).perform(click())
-        onView(withId(R.id.homeLine)).perform(click())
+        onView(withText("Teams")).perform(click())
+        onView(withId(R.id.recTeams))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.unfavorite)).perform(click())
         pressBack()
-        onView(withId(R.id.swipeRefresh))
+        onView(withId(R.id.swipeRefreshTeams))
                 .perform(withCustomConstraints(swipeDown(), isDisplayingAtLeast(85)))
     }
+
 
     // Register your Idling Resource before any tests regarding this component
     @Before
